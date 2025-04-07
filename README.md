@@ -52,7 +52,7 @@ cd checkpoints
 3. 克隆此仓库:
 ```bash
 cd sam2
-(https://github.com/ZHANGHAOYUAN324/SAM2-Fine-tuning.git)
+git clone https://github.com/ZHANGHAOYUAN324/SAM2-Fine-tuning.git
 ```
 
 ## 📊 数据集准备
