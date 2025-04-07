@@ -31,11 +31,10 @@
 
 ## 🔧 环境要求
 
-- Python 3.8+
+- Python 3.11.11
 - CUDA支持的GPU (推荐)
 - Git
-- Jupyter Notebook
-- 所需Python包(自动安装)
+- 所需Python包
 
 ## 🚀 安装步骤
 
