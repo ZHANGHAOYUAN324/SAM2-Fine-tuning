@@ -55,22 +55,18 @@ cd sam2
 (https://github.com/ZHANGHAOYUAN324/SAM2-Fine-tuning.git)
 ```
 
-
 ## 📊 数据集准备
 
-1. 准备按视角分类的心脏CT扫描图像和对应的JSON标注文件:
+1. 准备心脏CT扫描图像以及对应掩码的的JSON标注文件:
    ```
-   data/heart_chambers_dataset/
+   data_train/
    ├── a2c/  # 两腔室视图数据
-   │   ├── PatientA0001_a2c_27.png
    │   ├── PatientA0001_a2c_27.json
    │   └── ...
    ├── a3c/  # 三腔室视图数据
-   │   ├── PatientA0001_a3c_15.png
    │   ├── PatientA0001_a3c_15.json
    │   └── ...
    └── a4c/  # 四腔室视图数据
-       ├── PatientA0001_a4c_42.png
        ├── PatientA0001_a4c_42.json
        └── ...
    ```
@@ -110,42 +106,179 @@ cd sam2
 
 1. 进入微调目录:
 ```bash
-cd segment-anything-2/src-finetuning
+cd sam2
 ```
 
 2. 启动并运行微调Jupyter笔记本:
 ```bash
-jupyter notebook heart_chambers_fine_tune.ipynb
+jupyter notebook data_process.ipynb
 ```
 
 3. 按照笔记本中的说明:
    - 加载并预处理数据
-   - 配置训练参数
-   - 训练模型
-   - 评估结果
-   - 可视化不同视角的分割结果
+   - 生成可供sam2训练的原始图像以及掩码图像
 
-## 🔧 微调流程
-![微调流程图](./heart_chambers_finetuning_schema.jpg)
+4.开始使用数据训练sam2模型
+```bash
+python training.py
+```
+5.使用训练好的模型进行预测生成原始掩码图，原始模型图以及微调模型图
+```bash
+python testing.py
+```
+
 
 ## 📁 项目结构
 
 ```
-.
-├── installation.sh                          # 安装脚本
-├── HeartChambersSAMTrainer.py               # 心脏腔室SAM训练器
-├── heart_chambers_fine_tune.ipynb           # 训练和评估Jupyter笔记本
-├── data/                                    # 数据目录
-│   └── heart_chambers_dataset/
-│       ├── a2c/                             # 两腔室视图文件
-│       ├── a3c/                             # 三腔室视图文件
-│       └── a4c/                             # 四腔室视图文件
-└── segment-anything-2/                      # 安装后生成的SAM2代码目录
-    ├── checkpoints/                         # 模型检查点目录
-    └── src-finetuning/                      # 微调代码目录
-        ├── HeartChambersSAMTrainer.py       # 训练器代码副本
-        ├── heart_chambers_fine_tune.ipynb   # 笔记本副本
-        └── models/                          # 保存训练后模型的目录
+├── assets
+│   ├── model_diagram.png
+│   └── sa_v_dataset.jpg
+├── backend.Dockerfile
+├── checkpoints
+│   ├── download_ckpts.sh
+│   ├── sam2.1_hiera_base_plus.pt
+│   ├── sam2.1_hiera_large.pt
+│   ├── sam2.1_hiera_small.pt
+│   └── sam2.1_hiera_tiny.pt
+├── check.py
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── data_check.ipynb
+├── data_train
+│   ├── Annotations
+│   ├── JPEGImages
+│   ├── train.csv
+│   └── Visualization
+├── demo
+│   ├── backend
+│   ├── data
+│   ├── frontend
+│   └── README.md
+├── docker-compose.yaml
+├── example.ipynb
+├── INSTALL.md
+├── LICENSE
+├── LICENSE_cctorch
+├── MANIFEST.in
+├── Miniconda3-latest-MacOSX-arm64.sh
+├── models
+│   ├── model_10000.torch
+│   ├── model_1000.torch
+│   ├── model_11000.torch
+│   ├── model_12000.torch
+│   ├── model_13000.torch
+│   ├── model_14000.torch
+│   ├── model_15000.torch
+│   ├── model_16000.torch
+│   ├── model_17000.torch
+│   ├── model_18000.torch
+│   ├── model_19000.torch
+│   ├── model_20000.torch
+│   ├── model_2000.torch
+│   ├── model_21000.torch
+│   ├── model_22000.torch
+│   ├── model_23000.torch
+│   ├── model_24000.torch
+│   ├── model_25000.torch
+│   ├── model_26000.torch
+│   ├── model_27000.torch
+│   ├── model_28000.torch
+│   ├── model_29000.torch
+│   ├── model_30000.torch
+│   ├── model_3000.torch
+│   ├── model_31000.torch
+│   ├── model_32000.torch
+│   ├── model_33000.torch
+│   ├── model_34000.torch
+│   ├── model_35000.torch
+│   ├── model_36000.torch
+│   ├── model_37000.torch
+│   ├── model_38000.torch
+│   ├── model_39000.torch
+│   ├── model_40000.torch
+│   ├── model_4000.torch
+│   ├── model_41000.torch
+│   ├── model_42000.torch
+│   ├── model_43000.torch
+│   ├── model_44000.torch
+│   ├── model_45000.torch
+│   ├── model_46000.torch
+│   ├── model_47000.torch
+│   ├── model_48000.torch
+│   ├── model_49000.torch
+│   ├── model_5000.torch
+│   ├── model_6000.torch
+│   ├── model_7000.torch
+│   ├── model_8000.torch
+│   ├── model_9000.torch
+│   └── model_final.torch
+├── notebooks
+│   ├── automatic_mask_generator_example.ipynb
+│   ├── image_predictor_example.ipynb
+│   ├── images
+│   ├── video_predictor_example.ipynb
+│   └── videos
+├── pyproject.toml
+├── README.md
+├── RELEASE_NOTES.md
+├── results_comparison
+│   └── a4c_PatientD0062_a4c_93.jsonD_116
+├── sam2
+│   ├── automatic_mask_generator.py
+│   ├── benchmark.py
+│   ├── build_sam.py
+│   ├── configs
+│   ├── csrc
+│   ├── __init__.py
+│   ├── modeling
+│   ├── __pycache__
+│   ├── sam2_hiera_b+.yaml -> configs/sam2/sam2_hiera_b+.yaml
+│   ├── sam2_hiera_l.yaml -> configs/sam2/sam2_hiera_l.yaml
+│   ├── sam2_hiera_s.yaml -> configs/sam2/sam2_hiera_s.yaml
+│   ├── sam2_hiera_t.yaml -> configs/sam2/sam2_hiera_t.yaml
+│   ├── sam2_image_predictor.py
+│   ├── sam2_video_predictor_legacy.py
+│   ├── sam2_video_predictor.py
+│   └── utils
+├── SAM_2.egg-info
+│   ├── dependency_links.txt
+│   ├── PKG-INFO
+│   ├── requires.txt
+│   ├── SOURCES.txt
+│   └── top_level.txt
+├── sam2_training_visualization.png
+├── sav_dataset
+│   ├── example
+│   ├── LICENSE
+│   ├── LICENSE_DAVIS
+│   ├── LICENSE_VOS_BENCHMARK
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── sav_evaluator.py
+│   ├── sav_visualization_example.ipynb
+│   └── utils
+├── setup.py
+├── testing.py
+├── tools
+│   ├── README.md
+│   └── vos_inference.py
+├── training
+│   ├── assets
+│   ├── dataset
+│   ├── __init__.py
+│   ├── loss_fns.py
+│   ├── model
+│   ├── optimizer.py
+│   ├── __pycache__
+│   ├── README.md
+│   ├── scripts
+│   ├── trainer.py
+│   ├── train.py
+│   └── utils
+├── training.ipynb
+├── training.py
+└── training_vis.py
 ```
 
 ## ⚠️ 注意事项
@@ -157,13 +290,9 @@ jupyter notebook heart_chambers_fine_tune.ipynb
    - "RV" - 右心室
    - "M" 或 "myocardium" - 心肌
 
-2. 数据分割策略:
-   - 系统会自动按病人ID分割训练集和测试集
-   - 同一病人的所有视角数据都会被分到相同的集合中
-   - 确保每个病人都有足够数量的不同视角图像
 
-3. 模型选择:
-   - 默认使用SAM2 Hiera Small模型
+2. 模型选择:
+   - 默认使用SAM2 Hiera large模型
    - 可以在notebooks中修改配置使用其他模型
 
 ---
