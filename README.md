@@ -37,25 +37,24 @@
 - 所需Python包
 
 ## 🚀 安装步骤
-
-1. 克隆此仓库:
+1. 克隆sam2仓库以及安装配置文件
 ```bash
-git clone https://github.com/yourusername/heart_chambers_sam2.git
-cd heart_chambers_sam2
+git clone https://github.com/facebookresearch/segment-anything-2.git
+
+cd sam2; pip install -e .
+```
+2. 下载所有模型点：
+```bash
+cd checkpoints
+./download_ckpts.sh
 ```
 
-2. 运行安装脚本:
+3. 克隆此仓库:
 ```bash
-chmod +x installation.sh
-./installation.sh
+cd sam2
+(https://github.com/ZHANGHAOYUAN324/SAM2-Fine-tuning.git)
 ```
 
-此脚本会:
-- 克隆并安装SAM2
-- 下载必要的模型检查点
-- 设置训练环境
-- 安装所需依赖
-- 创建数据和模型目录
 
 ## 📊 数据集准备
 
