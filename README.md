@@ -1,7 +1,7 @@
 # 基于SAM2的心脏腔室CT分割项目 🫀
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11.11+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![SAM2](https://img.shields.io/badge/SAM-2.0-green.svg)](https://github.com/facebookresearch/segment-anything-2)
 
 微调Segment Anything Model 2 (SAM2)用于心脏CT扫描腔室分割任务。本项目提供了用于训练SAM2模型进行心脏腔室分割的工具和指南。
